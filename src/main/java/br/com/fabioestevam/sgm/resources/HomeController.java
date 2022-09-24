@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import br.com.fabioestevam.sgm.exceptions.UsuarioException;
 import br.com.fabioestevam.sgm.models.Email;
 import br.com.fabioestevam.sgm.models.Usuario;
+import br.com.fabioestevam.sgm.resources.utilities.Utilities;
 import br.com.fabioestevam.sgm.services.EmailService;
 import br.com.fabioestevam.sgm.services.UsuarioService;
 import net.bytebuddy.utility.RandomString;
@@ -30,7 +31,7 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/user")
+    @GetMapping("/home")
     public String userIndex() {
         return "home";
     }
@@ -57,7 +58,7 @@ public class HomeController {
     	
     	try {
     		usuarioService.updateTokenRecuperacaoSenha(token, email);
-    		String resetLink = getSiteURL(request) + "/reset?token=" + token;
+    		String resetLink = Utilities.getSiteURL(request) + "/reset?token=" + token;
     		sendEmail(email, resetLink);
     		model.addAttribute("message", "O link para redefinição de senha foi encaminhado para o seu e-mail.");
     	}
@@ -118,11 +119,6 @@ public class HomeController {
 				+ "Sistema de gestão da manutenção");
     	
     	emailService.sendEmail(mensagem);
-    }
-    
-    public static String getSiteURL(HttpServletRequest request) {
-        String siteURL = request.getRequestURL().toString();
-        return siteURL.replace(request.getServletPath(), "");
     }
     
 }

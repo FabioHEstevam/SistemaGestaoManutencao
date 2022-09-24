@@ -1,17 +1,21 @@
 package br.com.fabioestevam.sgm.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,7 +44,10 @@ public class Usuario implements UserDetails, Serializable{
 	
 	@ManyToMany
 	@JoinTable(name= "usuario_regra", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name="regra_id"))
-	private List<Regra> regras;
+	private List<Regra> regras = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "responsavel", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private List<Convite> convites = new ArrayList<>();
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

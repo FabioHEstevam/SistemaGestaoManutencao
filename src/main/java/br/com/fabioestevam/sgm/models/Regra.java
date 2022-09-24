@@ -26,11 +26,11 @@ public class Regra implements GrantedAuthority ,Serializable{
 	private Long id;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, unique = true)
-	private RegraEnum name;
+	private RegraEnum nome;
 
 	@Override
 	public String getAuthority() {
-		return this.name.toString();
+		return this.nome.toString();
 	}
 	
 	

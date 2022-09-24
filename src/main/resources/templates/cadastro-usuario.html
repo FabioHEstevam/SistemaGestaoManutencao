@@ -84,7 +84,7 @@
 		}
 	</style>
 
-	<title> SGM - Redefinição de senhas</title>
+	<title> SGM - Cadastro de Usuario</title>
 
 </head>
 
@@ -94,14 +94,14 @@
 		<div class="container-fluid h-custom">
 			<div class="row d-flex justify-content-center align-items-center h-100">
 
-				<div class="col-md-9 col-lg-6 col-xl-5">
-					<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-						class="img-fluid" alt="Sample image">
-				</div>
+				<div class="col-md-4 col-lg-6 col-xl-4 ">
 
-				<div class="col-md-8 col-lg-6 col-xl-4">
+					<form th:action="@{/usuario/cadastro}" method="post" th:object="${usuarioDTO}">
 
-					<form th:action="@{/reset}" method="post">
+						<div class="d-flex justify-content-between align-items-center">
+							<h2>Seja bem vindo ao Sistema de Gestão da Manutenção:</h2>
+
+						</div>
 
 						<div th:if="${error != null}">
 							<div class="alert alert-danger">
@@ -115,15 +115,36 @@
 							</div>
 						</div>
 
-						<div class="d-flex justify-content-between align-items-center">
-							<h2>Redefinição de senha:</h2>
-						</div>
-
 						<input type="hidden" name="token" th:value="${token}" />
 
 						<div class="form-outline mb-4">
+							<p>Preencha com seus dados para completar o cadastro</p>
+						</div>
+
+						<div class="form-outline mb-4">
+							<label for:"nome">Nome: </label>
+							<input type="text" id="nome" name="nome" class="form-control form-control-lg" th:classappend="${#fields.hasErrors('nome')} ? is-invalid"
+								placeholder="Nome" th:field="*{nome}" />
+						</div>
+
+						<div class="form-outline mb-4">
+							<label for:"nome">E-mail: </label>
+							<input type="email" id="username" name="username" class="form-control form-control-lg" th:classappend="${#fields.hasErrors('email')} ? is-invalid"
+								placeholder="E-mail" th:field="*{email}" />
+							
+						</div>
+						
+						<div class="form-outline mb-4">
+							<label for:"nome">Telefone: </label>
+							<input type="telefone" id="telefone" name="telefone" class="form-control form-control-lg"
+								placeholder="Telefone" th:field="*{telefone}" />
+						</div>
+
+						<div class="form-outline mb-4">
+							<label for:"nome">Senha: </label>
 							<input type="password" id="senha" name="senha" class="form-control form-control-lg" required
-								autofocus onkeyup="validatePassword(this.value);" placeholder="Digite sua nova senha" />
+								autofocus onkeyup="validatePassword(this.value);" placeholder="Digite sua nova senha"
+								th:field="*{senha}" />
 							<span id="msg"></span>
 						</div>
 

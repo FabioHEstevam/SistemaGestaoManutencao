@@ -29,7 +29,8 @@ public class WebSecurityConfig {
                   "/img/**",
                   "/webjars/**",
                   "/recovery/**",
-                  "/reset/**").permitAll()
+                  "/reset/**",
+                  "/usuario/cadastro/**").permitAll()
           .anyRequest().authenticated()
       .and()
       .formLogin()
